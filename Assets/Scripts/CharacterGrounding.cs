@@ -8,13 +8,14 @@ public class CharacterGrounding : MonoBehaviour
     [SerializeField] private Transform rightSensor;
     [SerializeField] private float maxDistance;
     [SerializeField] private LayerMask layerMask;
-    private bool isGrounded;
+
+    public bool IsGrounded { get; private set; }
 
     private void Update()
     {
         CheckSensorForGrounded(leftSensor);
 
-        if (!isGrounded)
+        if (!IsGrounded)
             CheckSensorForGrounded(rightSensor);
     }
 
@@ -22,8 +23,8 @@ public class CharacterGrounding : MonoBehaviour
     {
         var raycastHit = Physics2D.Raycast(sensor.position, Vector2.down, maxDistance, layerMask);
         if (raycastHit.collider != null)
-            isGrounded = true;
+            IsGrounded = true;
         else
-            isGrounded = false;
+            IsGrounded = false;
     }
 }

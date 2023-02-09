@@ -11,10 +11,12 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float jumpForce = 350f;
 
     private new Rigidbody2D rigidbody2D;
+    private CharacterGrounding characterGrounding;
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        characterGrounding = GetComponent<CharacterGrounding>();
     }
 
     private void FixedUpdate()
@@ -25,7 +27,7 @@ public class PlayerMovementController : MonoBehaviour
 
         transform.position += movement * Time.fixedDeltaTime * moveSpeed;
 
-        if (Input.GetButtonDown(FIRE1))
+        if (Input.GetButtonDown(FIRE1) && characterGrounding.IsGrounded)
         {
             rigidbody2D.AddForce(Vector2.up * jumpForce);
         }
