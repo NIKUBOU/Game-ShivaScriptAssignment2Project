@@ -7,17 +7,22 @@ public class CharacterAnimation : MonoBehaviour
     private const string SPEED = "Speed";
 
     private Animator animator;
-    private PlayerMovementController _playerMovementController;
+    private IMove iMove;
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        _playerMovementController = GetComponent<PlayerMovementController>();
+        iMove = GetComponent<IMove>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        float speed = _playerMovementController.Speed;
+        float speed = iMove.Speed;
         animator.SetFloat(SPEED, speed);
+
+        if (speed != 0)
+            spriteRenderer.flipX = speed < 0;
     }
 }
