@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpForce: 350
 --- !u!1 &1021931933
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +611,7 @@ MonoBehaviour:
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 2, z: -10}
   m_XDamping: 0.5
-  m_YDamping: 0.5
+  m_YDamping: 0
   m_ZDamping: 0.5
   m_AngularDampingMode: 0
   m_PitchDamping: 0
