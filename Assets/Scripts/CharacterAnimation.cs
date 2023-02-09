@@ -20,7 +20,7 @@ public class CharacterAnimation : MonoBehaviour
     private void Update()
     {
         float speed = iMove.Speed;
-        animator.SetFloat(SPEED, speed);
+        animator.SetFloat(SPEED, Mathf.Abs(speed));
 
         if (speed != 0)
             spriteRenderer.flipX = speed < 0;
