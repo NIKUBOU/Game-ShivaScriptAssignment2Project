@@ -14,11 +14,15 @@ public class UILivesText : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.OnLivesChanged += HandleOnLivesChanged;
+        tmproText.text = GameManager.Instance.Lives.ToString();
+    }
+
+    private void HandleOnLivesChanged(int livesRemaining)
+    {
+        tmproText.text = livesRemaining.ToString();
         
     }
 
-    private void Update()
-    {
-        tmproText.text = GameManager.Instance.Lives.ToString();
-    }
+    
 }
