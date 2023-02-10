@@ -41,7 +41,19 @@ public class GameManager : MonoBehaviour
             Deaths++;
             RestartGame();
         }
+        else
+            SendPlayerTOCheckpoint();
     }
+
+    private void SendPlayerTOCheckpoint()
+    {
+        var checkpointManager = FindObjectOfType<CheckpointManager>();
+        var checkpoint = checkpointManager.GetLastCheckpointThatWasPassed();
+
+        var player = FindObjectOfType<PlayerMovementController>();
+        player.transform.position = checkpoint.transform.position;
+    }
+
     internal void AddCoins()
     {
         coins++;
