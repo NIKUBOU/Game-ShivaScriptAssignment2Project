@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3929121152206924951}
   - component: {fileID: 3929121152206924950}
-  - component: {fileID: 3929121152206924948}
   m_Layer: 0
   m_Name: Saw Blade Circle
   m_TagString: Untagged
@@ -83,18 +82,6 @@ MonoBehaviour:
   end: {fileID: 3929121151540960952}
   sprite: {fileID: 3929121152416851564}
   speed: 2
---- !u!114 &3929121152206924948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3929121152206924905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0d38fa5c9de0642b59e18d0d58164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3929121152416851567
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +94,7 @@ GameObject:
   - component: {fileID: 3929121152416851562}
   - component: {fileID: 3929121152416851565}
   - component: {fileID: 3929121152416851563}
+  - component: {fileID: 7726637287991154967}
   m_Layer: 0
   m_Name: Saw Sprite and Collider
   m_TagString: Untagged
@@ -217,6 +205,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7726637287991154967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929121152416851567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0d38fa5c9de0642b59e18d0d58164c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3929121152646949479
 GameObject:
   m_ObjectHideFlags: 0
