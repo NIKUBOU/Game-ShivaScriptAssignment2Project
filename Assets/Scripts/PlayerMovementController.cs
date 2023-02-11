@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 350f;
+    [SerializeField] private float runSpeed = 3f;
 
     private new Rigidbody2D rigidbody2D;
     private CharacterGrounding characterGrounding;
@@ -65,5 +66,10 @@ public class PlayerMovementController : MonoBehaviour, IMove
         Vector3 movement = new Vector3(horizontal, 0);
 
         transform.position += movement * Time.fixedDeltaTime * moveSpeed;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.position += movement * Time.fixedDeltaTime * moveSpeed * runSpeed;
+        }
     }
 }
