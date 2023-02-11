@@ -12,6 +12,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
 
     private new Rigidbody2D rigidbody2D;
     private CharacterGrounding characterGrounding;
+    private Animator animator;
 
     public float Speed { get; private set; }
 
@@ -19,13 +20,25 @@ public class PlayerMovementController : MonoBehaviour, IMove
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         characterGrounding = GetComponent<CharacterGrounding>();
+        animator = GetComponent<Animator>();
     }
+
 
     private void Update()
     {
         if (Input.GetButtonDown(FIRE1) && characterGrounding.IsGrounded)
         {
             rigidbody2D.AddForce(Vector2.up * jumpForce);
+
+        }
+
+        if (!characterGrounding.IsGrounded)
+        {
+            animator.SetBool("Jump", true);
+        }    
+        else
+        {
+            animator.SetBool("Jump", false);
         }
         
     }

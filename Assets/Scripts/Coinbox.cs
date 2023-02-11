@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Coinbox : MonoBehaviour
 {
+    private const string COINSPIN = "CoinSpin";
+    
     [SerializeField] private SpriteRenderer enabledSprite;
     [SerializeField] private SpriteRenderer disabledSprite;
     [SerializeField] private int totalCoins = 1;
 
     private int remainingCoins;
+    private Animator animator;
+
 
     private void Awake()
     {
         remainingCoins = totalCoins;
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,6 +32,7 @@ public class Coinbox : MonoBehaviour
         {
             GameManager.Instance.AddCoins();
             remainingCoins--;
+            animator.SetTrigger(COINSPIN);
 
             if (remainingCoins <= 0)
             {
