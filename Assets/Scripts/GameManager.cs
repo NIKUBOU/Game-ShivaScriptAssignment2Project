@@ -7,18 +7,23 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
+
     public int Lives { get; private set; }
     public int Deaths { get; private set; }
+    public int Coins { get; private set; }
+    public int Scores { get; private set; }
+    public float Timer { get; private set; }
 
     public static GameManager Instance { get; private set; }
 
     public event Action<int> OnLivesChanged;
     public event Action<int> OnCoinsChanged;
     public event Action<int> OnScoreChanged;
+    public event Action<int> OnDeathsChanged;
+    public event Action<float> OnTimerChanged;
 
-    private int coins;
-    private int score;
     private int currentLevelIndex;
+    private bool isTimerOn;
 
     private void Awake()
     {
@@ -27,10 +32,35 @@ public class GameManager : MonoBehaviour
         else
         {
             Deaths = 0;
+            Coins = 0;
+            Scores = 0;
+            Timer = 0;
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
             RestartGame();
+        }
+    }
+
+    private void Update()
+    {
+        CountTime();
+
+    }
+
+    public void CountTime()
+    {
+        if (currentLevelIndex < 1 || currentLevelIndex >= 4)
+        {
+            isTimerOn = false;
+        }
+        else
+        {
+            isTimerOn = true;
+            if (isTimerOn)
+                Timer += Time.deltaTime;
+
+            OnTimerChanged?.Invoke(Timer);
         }
     }
 
@@ -43,10 +73,12 @@ public class GameManager : MonoBehaviour
         if (Lives <= 0)
         {
             Deaths++;
-            RestartGame();
+            if (OnDeathsChanged != null)
+                OnDeathsChanged(Deaths);
         }
         else
             SendPlayerTOCheckpoint();
+
     }
 
     private void SendPlayerTOCheckpoint()
@@ -60,10 +92,10 @@ public class GameManager : MonoBehaviour
 
     internal void AddCoins()
     {
-        coins++;
+        Coins++;
 
         if (OnCoinsChanged != null)
-            OnCoinsChanged(coins);
+            OnCoinsChanged(Coins);
     }
 
     public void MoveToNextLevel()
@@ -72,26 +104,29 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentLevelIndex);
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
-        currentLevelIndex = 0;
-
         Lives = 3;
-        coins = 0;
-        score = 0;
+        Coins = 0;
+        Scores = 0;
 
         if (OnCoinsChanged != null)
-            OnCoinsChanged(coins);
+            OnCoinsChanged(Coins);
 
+        SceneManager.LoadScene(currentLevelIndex);
+
+    }
+
+    private void GoToMenu()
+    {
         SceneManager.LoadScene(0);
     }
 
     internal void AddScore(int points)
     {
-        score += points;
+        Scores += points;
 
-        if (OnScoreChanged != null)
-            OnScoreChanged(score);
+        OnScoreChanged?.Invoke(Scores);
     }
 
 }

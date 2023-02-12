@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UICoinsText : MonoBehaviour
+public class UIDeathCounts : MonoBehaviour
 {
     private TextMeshProUGUI tmproText;
 
@@ -14,12 +14,12 @@ public class UICoinsText : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnCoinsChanged += HandleOnCoinsChanged;
-        tmproText.text = GameManager.Instance.Coins.ToString();
+        GameManager.Instance.OnDeathsChanged += HandleOnDeathsChanged;
+        tmproText.text = GameManager.Instance.Deaths.ToString();
     }
 
-    private void HandleOnCoinsChanged(int coins)
+    private void HandleOnDeathsChanged(int deaths)
     {
-        tmproText.text = coins.ToString();
+        tmproText.text = deaths.ToString();   
     }
 }

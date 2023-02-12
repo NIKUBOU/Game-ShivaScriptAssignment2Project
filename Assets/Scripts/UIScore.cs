@@ -15,7 +15,10 @@ public class UIScore : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnScoreChanged += HandleOnScoreChanged;
+        tmproText.text = GameManager.Instance.Scores.ToString();
     }
+
+    
 
     private void HandleOnScoreChanged(int score)
     {

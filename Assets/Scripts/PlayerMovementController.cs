@@ -10,11 +10,13 @@ public class PlayerMovementController : MonoBehaviour, IMove
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 350f;
     [SerializeField] private float runSpeed = 3f;
+    [SerializeField] GameObject retryScreen;
 
     private new Rigidbody2D rigidbody2D;
     private CharacterGrounding characterGrounding;
     private Animator animator;
     private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
 
     public float Speed { get; private set; }
 
@@ -24,12 +26,14 @@ public class PlayerMovementController : MonoBehaviour, IMove
         characterGrounding = GetComponent<CharacterGrounding>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
     private void Update()
     {
         PlayerJump();
+        OnPlayerDeath();
 
     }
 
@@ -70,6 +74,17 @@ public class PlayerMovementController : MonoBehaviour, IMove
         if (Input.GetKey(KeyCode.LeftShift))
         {
             transform.position += movement * Time.fixedDeltaTime * moveSpeed * runSpeed;
+        }
+    }
+
+    private void OnPlayerDeath()
+    {
+        if (GameManager.Instance.Lives <= 0)
+        {
+            spriteRenderer.enabled = false;
+            this.enabled = false;
+            characterGrounding.enabled = false;
+            retryScreen.SetActive(true);
         }
     }
 }
