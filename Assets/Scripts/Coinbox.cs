@@ -31,6 +31,7 @@ public class Coinbox : MonoBehaviour
             WasHitFromBelow(collision))
         {
             GameManager.Instance.AddCoins();
+            GameManager.Instance.AddScore(100);
             remainingCoins--;
             animator.SetTrigger(COINSPIN);
 

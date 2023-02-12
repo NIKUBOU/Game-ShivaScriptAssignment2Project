@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +14,11 @@ public class GameManager : MonoBehaviour
 
     public event Action<int> OnLivesChanged;
     public event Action<int> OnCoinsChanged;
+    public event Action<int> OnScoreChanged;
 
     private int coins;
+    private int score;
+    private int currentLevelIndex;
 
     private void Awake()
     {
@@ -62,15 +66,32 @@ public class GameManager : MonoBehaviour
             OnCoinsChanged(coins);
     }
 
+    public void MoveToNextLevel()
+    {
+        currentLevelIndex++;
+        SceneManager.LoadScene(currentLevelIndex);
+    }
+
     private void RestartGame()
     {
+        currentLevelIndex = 0;
+
         Lives = 3;
         coins = 0;
+        score = 0;
 
         if (OnCoinsChanged != null)
             OnCoinsChanged(coins);
 
         SceneManager.LoadScene(0);
+    }
+
+    internal void AddScore(int points)
+    {
+        score += points;
+
+        if (OnScoreChanged != null)
+            OnScoreChanged(score);
     }
 
 }
