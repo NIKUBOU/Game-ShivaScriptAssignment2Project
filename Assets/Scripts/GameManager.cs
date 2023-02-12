@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void CountTime()
     {
-        if (currentLevelIndex < 1 || currentLevelIndex >= 3)
+        if (currentLevelIndex < 1 || currentLevelIndex >= 4)
         {
             isTimerOn = false;
             currentTimer = Timer;
