@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private int currentLevelIndex;
     private bool isTimerOn;
+    private float currentTimer;
 
     private void Awake()
     {
@@ -45,14 +46,14 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CountTime();
-
     }
 
     public void CountTime()
     {
-        if (currentLevelIndex < 1 || currentLevelIndex >= 4)
+        if (currentLevelIndex < 1 || currentLevelIndex >= 3)
         {
             isTimerOn = false;
+            currentTimer = Timer;
         }
         else
         {
