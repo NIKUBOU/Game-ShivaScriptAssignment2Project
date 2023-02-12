@@ -12,7 +12,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
     [SerializeField] private float runSpeed = 3f;
     [SerializeField] GameObject retryScreen;
 
-    private new Rigidbody2D rigidbody2D;
+    private  Rigidbody2D _rigidbody2D;
     private CharacterGrounding characterGrounding;
     private Animator animator;
     private AudioSource audioSource;
@@ -22,7 +22,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         characterGrounding = GetComponent<CharacterGrounding>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -41,7 +41,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
     {
         if (Input.GetButtonDown(FIRE1) && characterGrounding.IsGrounded)
         {
-            rigidbody2D.AddForce(Vector2.up * jumpForce);
+            _rigidbody2D.AddForce(Vector2.up * jumpForce);
             audioSource.Play();
 
         }
